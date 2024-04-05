@@ -3,11 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Página Login</title>
 </head>
 <body>
-    <header>
-        
-    </header>
+<header>
+    <a href="/pagina1.html">Pagina 1</a>
+    <a href="/pagina2.html">Pagina 2</a>
+    <a href="/pagina3.html">Contato</a>
+
+</header>
+
+    <h1>Login</h1>
+    <form action="/index.html" method="post" id="login-form">
+     <label for="nome">Nome:</label>
+     <input type="text" id="nome" name="nome" required>
+     <br>
+     <label for="senha">Senha:</label>
+     <input type="password" id="senha" name="senha" required>
+     <br>
+     <button type="submit" id="btn">Acessar</button>
+    </form>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            var nome = document.getElementById("nome").value;
+            var senha = document.getElementById("senha").value;
+
+            fetch("/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ nome: nome, senha: senha })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("ACESSO CONCEDIDO");
+                } else {
+                    alert("USUÁRIO OU SENHA INVÁLIDOS!");
+                }
+            });
+        });
+    </script>
+
+<footer>
+    Desenvolvido por: <br>
+    Nicolas da Silva Santos RGM:332844310 <br>
+    Daniel Santos RGM:32990910 <br>
+    Alisson Torres RGM:33303061<br>
+    Paulo Ricardo RGM:32976186<br>
+</footer>
 </body>
 </html>
